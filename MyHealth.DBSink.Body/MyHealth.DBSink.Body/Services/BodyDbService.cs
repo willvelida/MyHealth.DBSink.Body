@@ -2,8 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using MyHealth.Common.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using mdl = MyHealth.Common.Models;
 

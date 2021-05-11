@@ -1,12 +1,11 @@
-using System;
-using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MyHealth.Common;
 using MyHealth.DBSink.Body.Services;
 using Newtonsoft.Json;
+using System;
+using System.Threading.Tasks;
 using mdl = MyHealth.Common.Models;
 
 namespace MyHealth.DBSink.Body.Functions
@@ -28,7 +27,7 @@ namespace MyHealth.DBSink.Body.Functions
         }
 
         [FunctionName(nameof(CreateWeightDocument))]
-        public async Task Run([ServiceBusTrigger("myhealthbodytopic", "myhealthbodysubscription", Connection = "ServiceBusConnectionString")]string mySbMsg, ILogger logger)
+        public async Task Run([ServiceBusTrigger("myhealthbodytopic", "myhealthbodysubscription", Connection = "ServiceBusConnectionString")] string mySbMsg, ILogger logger)
         {
             try
             {
