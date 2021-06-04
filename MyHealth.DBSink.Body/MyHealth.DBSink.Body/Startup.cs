@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MyHealth.Common;
 using MyHealth.DBSink.Body;
+using MyHealth.DBSink.Body.Services;
 using System.IO;
 
 [assembly: FunctionsStartup(typeof(Startup))]
@@ -32,6 +33,7 @@ namespace MyHealth.DBSink.Body
                 IConfiguration config = sp.GetService<IConfiguration>();
                 return new ServiceBusHelpers(config["ServiceBusConnectionString"]);
             });
+            builder.Services.AddScoped<IBodyDbService, BodyDbService>();
         }
     }
 }
