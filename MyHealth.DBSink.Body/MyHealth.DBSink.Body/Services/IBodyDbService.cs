@@ -5,6 +5,6 @@ namespace MyHealth.DBSink.Body.Services
 {
     public interface IBodyDbService
     {
-        Task AddWeightDocument(mdl.Weight weight);
+        Task AddWeightDocument(mdl.WeightEnvelope weightEnvelope);
     }
 }

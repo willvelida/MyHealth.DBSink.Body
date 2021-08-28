@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MyHealth.Common;
 using MyHealth.DBSink.Body;
+using MyHealth.DBSink.Body.Mappers;
 using MyHealth.DBSink.Body.Services;
 using System.IO;
 
@@ -34,6 +35,7 @@ namespace MyHealth.DBSink.Body
                 return new ServiceBusHelpers(config["ServiceBusConnectionString"]);
             });
             builder.Services.AddScoped<IBodyDbService, BodyDbService>();
+            builder.Services.AddScoped<IWeightEnvelopeMapper, WeightEnvelopeMapper>();
         }
     }
 }

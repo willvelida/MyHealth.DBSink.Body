@@ -37,13 +37,13 @@ namespace MyHealth.DBSink.Body.UnitTests.ServicesTests
         public async Task AddNutritionDocumentWhenCreateItemAsyncIsCalled()
         {
             // Arrange
-            mdl.Weight testWeightDocument = new mdl.Weight
+            mdl.WeightEnvelope testWeightDocument = new mdl.WeightEnvelope
             {
-                Date = "2021-05-11"
+                Date = DateTime.Parse("2021-05-11")
             };
 
 
-            _mockContainer.SetupCreateItemAsync<mdl.Weight>();
+            _mockContainer.SetupCreateItemAsync<mdl.WeightEnvelope>();
 
             // Act
             Func<Task> serviceAction = async () => await _sut.AddWeightDocument(testWeightDocument);
@@ -61,9 +61,9 @@ namespace MyHealth.DBSink.Body.UnitTests.ServicesTests
         public async Task ThrowExceptionWhenCreateItemAsyncCallFails()
         {
             // Arrange
-            mdl.Weight testWeightDocument = new mdl.Weight
+            mdl.WeightEnvelope testWeightDocument = new mdl.WeightEnvelope
             {
-                Date = "2021-05-11"
+                Date = DateTime.Parse("2021-05-11")
             };
 
 

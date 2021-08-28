@@ -22,20 +22,13 @@ namespace MyHealth.DBSink.Body.Services
             _myHealthContainer = _cosmosClient.GetContainer(_configuration["DatabaseName"], _configuration["ContainerName"]);
         }
 
-        public async Task AddWeightDocument(mdl.Weight weight)
+        public async Task AddWeightDocument(mdl.WeightEnvelope weightEnvelope)
         {
             try
             {
                 ItemRequestOptions itemRequestOptions = new ItemRequestOptions
                 {
                     EnableContentResponseOnWrite = false
-                };
-
-                mdl.WeightEnvelope weightEnvelope = new WeightEnvelope
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Weight = weight,
-                    DocumentType = "Weight"
                 };
 
                 await _myHealthContainer.CreateItemAsync(

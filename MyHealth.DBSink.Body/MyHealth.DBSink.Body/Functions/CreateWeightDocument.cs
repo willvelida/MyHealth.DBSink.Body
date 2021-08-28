@@ -2,6 +2,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MyHealth.Common;
+using MyHealth.DBSink.Body.Mappers;
 using MyHealth.DBSink.Body.Services;
 using Newtonsoft.Json;
 using System;
@@ -14,15 +15,18 @@ namespace MyHealth.DBSink.Body.Functions
     {
         private readonly IConfiguration _configuration;
         private readonly IBodyDbService _bodyDbService;
+        private readonly IWeightEnvelopeMapper _weightEnvelopeMapper;
         private readonly IServiceBusHelpers _serviceBusHelpers;
 
         public CreateWeightDocument(
             IConfiguration configuration,
             IBodyDbService bodyDbService,
+            IWeightEnvelopeMapper weightEnvelopeMapper,
             IServiceBusHelpers serviceBusHelpers)
         {
             _configuration = configuration;
             _bodyDbService = bodyDbService;
+            _weightEnvelopeMapper = weightEnvelopeMapper;
             _serviceBusHelpers = serviceBusHelpers;
         }
 
@@ -32,7 +36,8 @@ namespace MyHealth.DBSink.Body.Functions
             try
             {
                 var weightDocument = JsonConvert.DeserializeObject<mdl.Weight>(mySbMsg);
-                await _bodyDbService.AddWeightDocument(weightDocument);
+                var weightEnvelope = _weightEnvelopeMapper.MapWeightToWeightEnvelope(weightDocument);
+                await _bodyDbService.AddWeightDocument(weightEnvelope);
                 logger.LogInformation($"Weight document with {weightDocument.Date} has been persisted");
             }
             catch (Exception ex)
