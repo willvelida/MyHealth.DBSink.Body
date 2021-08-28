@@ -39,7 +39,7 @@ namespace MyHealth.DBSink.Body.UnitTests.ServicesTests
             // Arrange
             mdl.WeightEnvelope testWeightDocument = new mdl.WeightEnvelope
             {
-                Date = DateTime.Parse("2021-05-11")
+                Date = "2021-05-11"
             };
 
 
@@ -63,7 +63,7 @@ namespace MyHealth.DBSink.Body.UnitTests.ServicesTests
             // Arrange
             mdl.WeightEnvelope testWeightDocument = new mdl.WeightEnvelope
             {
-                Date = DateTime.Parse("2021-05-11")
+                Date = "2021-05-11"
             };
 
 

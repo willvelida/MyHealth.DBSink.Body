@@ -1,8 +1,5 @@
 ﻿using MyHealth.Common.Models;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
 using mdl = MyHealth.Common.Models;
 
 namespace MyHealth.DBSink.Body.Mappers
@@ -19,7 +16,7 @@ namespace MyHealth.DBSink.Body.Mappers
                 Id = Guid.NewGuid().ToString(),
                 Weight = weight,
                 DocumentType = "Weight",
-                Date = DateTime.ParseExact(weight.Date, "yyyy-MM-dd", CultureInfo.InvariantCulture)
+                Date = weight.Date
             };
 
             return weightEnvelope;

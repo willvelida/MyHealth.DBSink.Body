@@ -1,6 +1,5 @@
 ﻿using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Configuration;
-using MyHealth.Common.Models;
 using System;
 using System.Threading.Tasks;
 using mdl = MyHealth.Common.Models;

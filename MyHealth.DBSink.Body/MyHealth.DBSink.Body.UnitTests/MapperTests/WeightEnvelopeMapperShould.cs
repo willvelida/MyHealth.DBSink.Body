@@ -3,8 +3,6 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 using MyHealth.DBSink.Body.Mappers;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 using mdl = MyHealth.Common.Models;
 
@@ -41,7 +39,7 @@ namespace MyHealth.DBSink.Body.UnitTests.MapperTests
                 expectedWeightEnvelope.Should().BeOfType<mdl.WeightEnvelope>();
                 expectedWeightEnvelope.Weight.Should().Be(testWeight);
                 expectedWeightEnvelope.DocumentType.Should().Be("Weight");
-                expectedWeightEnvelope.Date.Should().Be(DateTime.Parse(testWeight.Date));
+                expectedWeightEnvelope.Date.Should().Be(testWeight.Date);
             }
         }
     }
