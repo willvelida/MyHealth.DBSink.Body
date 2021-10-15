@@ -1,27 +1,28 @@
 ﻿using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Configuration;
+using MyHealth.Common.Models;
+using MyHealth.DBSink.Body.Repository.Interfaces;
 using System;
 using System.Threading.Tasks;
-using mdl = MyHealth.Common.Models;
 
-namespace MyHealth.DBSink.Body.Services
+namespace MyHealth.DBSink.Body.Repository
 {
-    public class BodyDbService : IBodyDbService
+    public class BodyRepository : IBodyRepository
     {
         private readonly CosmosClient _cosmosClient;
         private readonly Container _myHealthContainer;
         private readonly IConfiguration _configuration;
 
-        public BodyDbService(
+        public BodyRepository(
             CosmosClient cosmosClient,
             IConfiguration configuration)
         {
-            _configuration = configuration;
             _cosmosClient = cosmosClient;
+            _configuration = configuration;
             _myHealthContainer = _cosmosClient.GetContainer(_configuration["DatabaseName"], _configuration["ContainerName"]);
         }
 
-        public async Task AddWeightDocument(mdl.WeightEnvelope weightEnvelope)
+        public async Task CreateWeight(WeightEnvelope weightEnvelope)
         {
             try
             {

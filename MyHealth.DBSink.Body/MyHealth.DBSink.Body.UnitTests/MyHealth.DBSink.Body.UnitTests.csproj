@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MyHealth.DBSink.Body.Repository\MyHealth.DBSink.Body.Repository.csproj" />
     <ProjectReference Include="..\MyHealth.DBSink.Body\MyHealth.DBSink.Body.csproj" />
   </ItemGroup>
 

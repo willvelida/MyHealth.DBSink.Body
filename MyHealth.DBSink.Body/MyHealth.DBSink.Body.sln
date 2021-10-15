@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyHealth.DBSink.Body", "MyH
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyHealth.DBSink.Body.UnitTests", "MyHealth.DBSink.Body.UnitTests\MyHealth.DBSink.Body.UnitTests.csproj", "{B5029141-98DF-4397-909B-EE6C1D75A2E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyHealth.DBSink.Body.Repository", "MyHealth.DBSink.Body.Repository\MyHealth.DBSink.Body.Repository.csproj", "{5AC63210-55CF-4464-B5AE-47FC62B94543}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyHealth.DBSink.Body.Service", "MyHealth.DBSink.Body.Service\MyHealth.DBSink.Body.Service.csproj", "{3C7204F4-C8B3-4EAF-B34D-30F341BF50EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{B5029141-98DF-4397-909B-EE6C1D75A2E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5029141-98DF-4397-909B-EE6C1D75A2E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5029141-98DF-4397-909B-EE6C1D75A2E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AC63210-55CF-4464-B5AE-47FC62B94543}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AC63210-55CF-4464-B5AE-47FC62B94543}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AC63210-55CF-4464-B5AE-47FC62B94543}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AC63210-55CF-4464-B5AE-47FC62B94543}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C7204F4-C8B3-4EAF-B34D-30F341BF50EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C7204F4-C8B3-4EAF-B34D-30F341BF50EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C7204F4-C8B3-4EAF-B34D-30F341BF50EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C7204F4-C8B3-4EAF-B34D-30F341BF50EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

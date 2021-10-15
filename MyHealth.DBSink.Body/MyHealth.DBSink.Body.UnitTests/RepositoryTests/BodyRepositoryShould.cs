@@ -2,7 +2,7 @@
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Configuration;
 using Moq;
-using MyHealth.DBSink.Body.Services;
+using MyHealth.DBSink.Body.Repository;
 using MyHealth.DBSink.Body.UnitTests.TestHelpers;
 using System;
 using System.Threading;
@@ -10,17 +10,17 @@ using System.Threading.Tasks;
 using Xunit;
 using mdl = MyHealth.Common.Models;
 
-namespace MyHealth.DBSink.Body.UnitTests.ServicesTests
+namespace MyHealth.DBSink.Body.UnitTests.RepositoryTests
 {
-    public class BodyDbServiceShould
+    public class BodyRepositoryShould
     {
         private Mock<CosmosClient> _mockCosmosClient;
         private Mock<Container> _mockContainer;
         private Mock<IConfiguration> _mockConfiguration;
 
-        private BodyDbService _sut;
+        private BodyRepository _sut;
 
-        public BodyDbServiceShould()
+        public BodyRepositoryShould()
         {
             _mockCosmosClient = new Mock<CosmosClient>();
             _mockContainer = new Mock<Container>();
@@ -29,7 +29,7 @@ namespace MyHealth.DBSink.Body.UnitTests.ServicesTests
             _mockConfiguration.Setup(x => x["DatabaseName"]).Returns("db");
             _mockConfiguration.Setup(x => x["ContainerName"]).Returns("col");
 
-            _sut = new BodyDbService(
+            _sut = new BodyRepository(
                 _mockCosmosClient.Object, _mockConfiguration.Object);
         }
 
@@ -46,7 +46,7 @@ namespace MyHealth.DBSink.Body.UnitTests.ServicesTests
             _mockContainer.SetupCreateItemAsync<mdl.WeightEnvelope>();
 
             // Act
-            Func<Task> serviceAction = async () => await _sut.AddWeightDocument(testWeightDocument);
+            Func<Task> serviceAction = async () => await _sut.CreateWeight(testWeightDocument);
 
             // Assert
             await serviceAction.Should().NotThrowAsync<Exception>();
@@ -75,7 +75,7 @@ namespace MyHealth.DBSink.Body.UnitTests.ServicesTests
                 It.IsAny<CancellationToken>())).ThrowsAsync(new Exception());
 
             // Act
-            Func<Task> serviceAction = async () => await _sut.AddWeightDocument(testWeightDocument);
+            Func<Task> serviceAction = async () => await _sut.CreateWeight(testWeightDocument);
 
             // Assert
             await serviceAction.Should().ThrowAsync<Exception>();

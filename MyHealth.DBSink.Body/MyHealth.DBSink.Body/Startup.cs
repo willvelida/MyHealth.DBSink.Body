@@ -4,13 +4,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MyHealth.Common;
 using MyHealth.DBSink.Body;
-using MyHealth.DBSink.Body.Mappers;
-using MyHealth.DBSink.Body.Services;
+using MyHealth.DBSink.Body.Repository;
+using MyHealth.DBSink.Body.Repository.Interfaces;
+using MyHealth.DBSink.Body.Service;
+using MyHealth.DBSink.Body.Service.Interfaces;
+using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 [assembly: FunctionsStartup(typeof(Startup))]
 namespace MyHealth.DBSink.Body
 {
+    [ExcludeFromCodeCoverage]
     public class Startup : FunctionsStartup
     {
         public override void Configure(IFunctionsHostBuilder builder)
@@ -26,7 +31,12 @@ namespace MyHealth.DBSink.Body
             builder.Services.AddSingleton(sp =>
             {
                 IConfiguration config = sp.GetService<IConfiguration>();
-                return new CosmosClient(config["CosmosDBConnectionString"]);
+                CosmosClientOptions cosmosClientOptions = new CosmosClientOptions
+                {
+                    MaxRetryAttemptsOnRateLimitedRequests = 3,
+                    MaxRetryWaitTimeOnRateLimitedRequests = TimeSpan.FromSeconds(60)
+                };
+                return new CosmosClient(config["CosmosDBConnectionString"], cosmosClientOptions);
             });
 
             builder.Services.AddSingleton<IServiceBusHelpers>(sp =>
@@ -34,8 +44,8 @@ namespace MyHealth.DBSink.Body
                 IConfiguration config = sp.GetService<IConfiguration>();
                 return new ServiceBusHelpers(config["ServiceBusConnectionString"]);
             });
-            builder.Services.AddScoped<IBodyDbService, BodyDbService>();
-            builder.Services.AddScoped<IWeightEnvelopeMapper, WeightEnvelopeMapper>();
+            builder.Services.AddScoped<IBodyRepository, BodyRepository>();
+            builder.Services.AddScoped<IBodyService, BodyService>();
         }
     }
 }
